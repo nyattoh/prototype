@@ -1,0 +1,61 @@
+image_type: gourd_shaped_crystal_forest_with_kota_v5
+
+general:
+  orientation: square                 # 1:1
+  aspect_ratio: 1.0
+  size: { width: "2048px", height: "2048px" }
+  quality: ultra_high_resolution
+  file_format: png
+  safe_zone: none
+  typography: {}                      # テキスト無し
+
+# ─ Text Overlays ─
+text_overlays: []                     # テキスト不要
+
+# == Theme == 
+theme:
+  name: GourdShapedCrystalForestWithKota
+  background:
+    type: pure_white_surface
+    colors: pristine_white
+    transparent: false
+  overlays:
+    - { type: subtle_soft_shadow, opacity: 0.05 }
+
+  focal_motif:
+    - colossal_gourd_shaped_crystal_with_front_panel_removed          # ひょうたん型クリスタル
+    - perfectly_clear_refractive_glass_surface
+    - lush_forest_with_trees_and_wildflowers_inside                 # 森と草花が広がる内部
+    - photorealistic_macro_detail
+
+  gourd_interior:
+    type: layered_forest_style
+    colors: rich_green_tones → earthy_brown → subtle_gold_highlights
+    strata:
+      - level_1_surface_forest:
+          structures: [tall_trees, flowering_plants, lush_grass]
+          life: [small_animals, birds_flitting]
+      - level_2_vegetation_layer:
+          features: [dense_underbrush, wildflowers, fallen_leaves]
+      - level_3_hiding_spots:
+          landmarks: [forest_clearing, rocks, small_stream]
+    life_and_detail:
+      - Kota_the_black_cat_in_the_forest, calmly observing
+      - dappled_sunlight_shining_through_trees
+      - butterflies_and_birds_flitting_through_the_scene
+      - gentle_breeze_swaying_grass_and_leaves
+
+  lighting: high_key_studio_light_top_right            # クリスタルの屈折・内部の光を強調
+  mood: peaceful_nature_wonder
+
+# == Metadata ==
+metadata:
+  prompt_language: english_only
+  name: "Gourd Shaped Crystal Forest with Kota"
+  guidelines:
+    - Crystal gourd must be colossal; the front quadrant is cleanly sliced away like an ant-farm window
+    - Interior shows a lush forest scene, with trees, wildflowers, and abundant greenery
+    - Include Kota, the black cat, calmly observing from the forest floor
+    - Maintain pure white background with soft ground shadow; no transparency in background
+    - Render photorealistically at 8k resolution, emphasizing glass refraction and internal depth
+    - Avoid text, watermarks, oversaturation, cartoonish style, or flat projection effects

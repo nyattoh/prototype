@@ -1,0 +1,50 @@
+image_prompt:
+  meta:
+    style: product_photo
+    aspect_ratio: "1:1"
+    resolution: "high"
+    background: blurred_park_background_with_natural_sunlight  # 自然光の公園
+    lighting: soft_natural_light  # 公園の自然光
+
+  subject:
+    type: gashapon_capsule_closed
+    shape: spherical  # 近い球体にする
+    material: translucent_plastic
+    texture: glossy
+    color: bottom_blue_top_clear
+    layout: centered
+    scale: large_relative_to_character
+    angle: macro_focus_eye_level
+
+  details:
+    transparency: high
+    highlights: clear_specular_glare_on_capsule
+    visible_features:
+      - detailed_seam_and_latch
+      - light_reflections_and_refracted_rays
+    shadow: soft_and_realistic
+
+  inside:
+    character:
+      name: "Custom Design"  # キャラ名に合わせて記述
+      type: abstract_red_and_blue_tear_shape_figurine
+      scale: small_enough_to_fit_capsule
+      pose: centered_inside_capsule
+      expression: neutral_or_stylized_abstract
+      texture: smooth_and_reflective
+      lighting: natural_from_outside_capsule
+
+  background_elements:
+    - type: opened_gashapon_capsule
+      layout: slightly_behind_and_to_the_side
+      state: open_and_tilted
+      parts:
+        - top_half_transparent
+        - bottom_half_blue
+      shadow: soft_and_subtle_on_the_surface
+
+  camera_settings:
+    type: macro_lens
+    focal_length: short_focal_length
+    depth_of_field: shallow_focus_on_capsule_and_character
+    aperture: wide_open

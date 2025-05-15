@@ -1,0 +1,111 @@
+# 1. 画像全体の定義
+image_description:
+  overall_prompt: |
+    ミートソースの作り方をステップバイステップで示すミニマルスタイルのレシピインフォグラフィック。
+    白い背景に、俯瞰視点で撮影された材料写真（ラベル付き）、アイコンと点線で繋がれた調理手順、最下部に完成品の写真を配置する。
+    全体的にクリーンで分かりやすいデザイン。
+  style:
+    - 写真 (材料、完成品 - 俯瞰視点)
+    - シンプルな線画アイコン (調理手順)
+    - ミニマルスタイル (Minimal style)
+    - インフォグラフィック (Infographic)
+  aspect_ratio: 縦長 (例: 9:16 or A4 ratio)
+  background:
+    color: "#FFFFFF" # 白背景
+
+# 2. 構成要素 (Components)
+components:
+  # 2.1 タイトル
+  - type: text
+    id: title
+    content: "ミートソース"
+    position: 上部中央 (Top Center)
+    font:
+      family: シンプルなゴシック体 (例: "Helvetica Neue", "Arial", "Noto Sans JP")
+      size: 大きい (Large)
+      weight: 中程度 (Medium) or やや太め (Semi-bold)
+      color: 黒 (#000000)
+
+  # 2.2 材料セクション (俯瞰写真とラベル)
+  - type: section
+    id: ingredients_section
+    layout: グリッド (Grid layout, neatly arranged)
+    position: タイトルの下 (Below title)
+    items:
+      - type: image_with_label
+        id: minced_meat
+        image_description: 合い挽き肉、俯瞰撮影 (Top-down view)
+        image_style: 写真
+        label_text: ["合い挽き肉", "200g"]
+        label_style: { font_family: "シンプルなゴシック体", size: 小 (Small), color: "#333333" }
+      - type: image_with_label
+        id: onion
+        image_description: みじん切りにした玉ねぎ、俯瞰撮影 (Top-down view)
+        image_style: 写真
+        label_text: ["玉ねぎ", "1個"]
+        label_style: { font_family: "シンプルなゴシック体", size: 小 (Small), color: "#333333" }
+      - type: image_with_label
+        id: canned_tomatoes
+        image_description: トマト缶、俯瞰撮影 (Top-down view)
+        image_style: 写真
+        label_text: ["トマト缶", "400g"]
+        label_style: { font_family: "シンプルなゴシック体", size: 小 (Small), color: "#333333" }
+      - type: image_with_label
+        id: garlic
+        image_description: みじん切りにしたにんにく、俯瞰撮影 (Top-down view)
+        image_style: 写真
+        label_text: ["にんにく", "1片"]
+        label_style: { font_family: "シンプルなゴシック体", size: 小 (Small), color: "#333333" }
+      - type: image_with_label
+        id: olive_oil
+        image_description: オリーブオイルが入った容器、俯瞰撮影 (Top-down view)
+        image_style: 写真
+        label_text: ["オリーブオイル", "大さじ2"]
+        label_style: { font_family: "シンプルなゴシック体", size: 小 (Small), color: "#333333" }
+
+  # 2.3 調理手順セクション (アイコンと点線)
+  - type: step_by_step_instructions
+    id: cooking_steps
+    position: 材料セクションの下 (Below ingredients section)
+    layout: 縦方向または横方向のシーケンス (Vertical or Horizontal sequence)
+    connection: 点線 (Dotted lines connecting steps/icons)
+    items:
+      - step: 1
+        icon: frying_pan
+        description: "フライパンにオリーブオイルを熱し、にんにくを炒める。"
+        style: { font_family: "シンプルなゴシック体", size: "中 (Medium)", color: "#333333" }
+      - step: 2
+        icon: frying_pan
+        description: "香りが出たら玉ねぎを加え、透明になるまで炒める。"
+        style: { font_family: "シンプルなゴシック体", size: "中 (Medium)", color: "#333333" }
+      - step: 3
+        icon: frying_pan
+        description: "合い挽き肉を加え、色が変わるまで炒める。"
+        style: { font_family: "シンプルなゴシック体", size: "中 (Medium)", color: "#333333" }
+      - step: 4
+        icon: saucepan
+        description: "トマト缶を加えて弱火で15〜20分煮込む。"
+        style: { font_family: "シンプルなゴシック体", size: "中 (Medium)", color: "#333333" }
+      - step: 5
+        icon: seasoning
+        description: "塩・こしょうで味を調えて完成。"
+        style: { font_family: "シンプルなゴシック体", size: "中 (Medium)", color: "#333333" }
+
+  # 2.4 完成写真 (俯瞰)
+  - type: image
+    id: final_dish
+    image_description: |
+      白い皿に盛り付けられたスパゲッティミートソース。真上からの俯瞰ショット (Top-down view)。
+      パスタの上にたっぷりのミートソースがかかり、クリーンでシンプルな印象。
+      背景は完全に白。
+    image_style: 写真 (Realistic photo, minimal style, top-down view)
+    position: 最下部中央 (Bottom Center, main focus)
+
+# 3. その他・調整項目
+additional_notes:
+  - 全体を通してミニマルデザインを維持する。
+  - アイコンはシンプルで分かりやすい線画スタイル。
+  - 点線は各ステップをスムーズに繋ぐ。
+  - フォントは一貫してシンプルなゴシック体。
+  - 材料写真、完成写真はすべて俯瞰視点で統一。
+  - 色数は抑え、白背景を基調とする。
