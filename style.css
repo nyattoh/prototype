@@ -1,0 +1,91 @@
+/* 基本リセット */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', 'Noto Sans JP', sans-serif;
+    background-color: #f0e6d6;
+    overflow-x: hidden;
+}
+
+body {
+    background-image: url('assets/images/desk.jpg');
+    /* Midjourney生成の机画像 */
+    background-size: cover;
+    /* 全体に広がるよう調整 */
+    background-position: center center;
+    /* 中央を基準に配置 */
+    background-repeat: no-repeat;
+    /* 繰り返しなし */
+}
+
+/* コンテナの調整 (机が背景に馴染むように透明に設定) */
+.desk-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.0);
+    /* 完全透明にする */
+}
+
+.desk {
+    width: 800px;
+    height: 450px;
+    background: rgba(255, 255, 255, 0.6);
+    /* 背景画像と馴染む半透明白背景 */
+    backdrop-filter: blur(8px);
+    /* 背景のぼかし効果 */
+    border-radius: 16px;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* アイテムのスタイル（変更なし） */
+.item {
+    width: 120px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.item:hover {
+    transform: scale(1.1);
+}
+
+.item img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.item-label {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #333;
+}
+
+/* ユーザー追加ボタン（変更なし） */
+.user-add .add-button {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #aaa;
+    font-size: 48px;
+    line-height: 80px;
+    margin: 0 auto;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.user-add .add-button:hover {
+    color: #666;
+}
