@@ -96,7 +96,7 @@ def main():
         response = {
             'success': True,
             'message': 'Upload completed successfully',
-            'imageUrl': f'/assets/images/uploads/{new_filename}',
+            'imageUrl': f'./assets/images/uploads/{new_filename}',
             'originalName': original_filename,
             'size': len(file_data)
         }
