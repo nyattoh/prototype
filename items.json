@@ -4,25 +4,25 @@
       "id": "item-character",
       "title": "小さなキャラクター",
       "imageUrl": "./assets/images/uploads/character.jpg",
-      "yamlFile": "yaml/character.yaml"
+      "yamlFile": "./yaml/character.yaml"
     },
     {
       "id": "item-diorama", 
       "title": "横浜ジオラマの洋書",
       "imageUrl": "./assets/images/uploads/diorama.jpg",
-      "yamlFile": "yaml/diorama.yaml"
+      "yamlFile": "./yaml/diorama.yaml"
     },
     {
       "id": "item-crystal",
       "title": "ひょうたんからコタ", 
       "imageUrl": "./assets/images/uploads/crystal.jpg",
-      "yamlFile": "yaml/crystal.yaml"
+      "yamlFile": "./yaml/crystal.yaml"
     },
     {
       "id": "item-soba",
       "title": "ミートソースレシピ",
       "imageUrl": "./assets/images/uploads/soba.jpg", 
-      "yamlFile": "yaml/soba.yaml"
+      "yamlFile": "./yaml/soba.yaml"
     }
   ]
 } 
