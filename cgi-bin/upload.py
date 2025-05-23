@@ -74,14 +74,14 @@ def main():
         
         # アップロードディレクトリのパス（ディレクトリ作成は行わない）
         upload_dir = Path('../assets/images/uploads')
-        yaml_dir = Path('../yaml/user')
+        yaml_dir = Path('../yaml')
         
         # ディレクトリが存在するかチェック
         if not upload_dir.exists():
             raise Exception('Upload directory does not exist')
         
-        # YAMLディレクトリが存在しない場合は作成
-        yaml_dir.mkdir(parents=True, exist_ok=True)
+        if not yaml_dir.exists():
+            raise Exception('YAML directory does not exist')
         
         # ユニークなファイル名を生成（完全にASCII安全）
         timestamp = str(int(time.time()))
@@ -116,7 +116,7 @@ def main():
             'success': True,
             'message': 'Upload completed successfully',
             'imageUrl': f'./assets/images/uploads/{new_filename}',
-            'yamlFile': f'./yaml/user/{yaml_filename}',
+            'yamlFile': f'./yaml/{yaml_filename}',
             'originalName': original_filename,
             'size': len(file_data)
         }
