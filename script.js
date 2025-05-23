@@ -93,9 +93,10 @@ function setupImagePreview() {
 }
 
 // 画像をアップロード（修正版）
-async function uploadImage(file) {
+async function uploadImage(file, yamlContent) {
     const formData = new FormData();
     formData.append('image', file);
+    formData.append('yamlContent', yamlContent);  // YAMLコンテンツも追加
 
     try {
         // XSERVERのcgi-binディレクトリにアクセス
@@ -242,7 +243,7 @@ async function handleFormSubmit(event) {
         }
         
         // 画像をアップロード
-        const result = await uploadImage(file);
+        const result = await uploadImage(file, yamlContent);
         
         // アイテムを追加（YAMLファイルパスを使用）
         await addItemToDesk(title, result.imageUrl, result.yamlFile);
