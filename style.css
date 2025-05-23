@@ -45,6 +45,7 @@ body {
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
+    flex-wrap: wrap;
 }
 
 /* アイテムのスタイル（変更なし） */
@@ -53,6 +54,7 @@ body {
     text-align: center;
     cursor: pointer;
     transition: transform 0.2s ease;
+    margin: 10px;
 }
 
 .item:hover {
@@ -84,10 +86,12 @@ body {
     line-height: 80px;
     margin: 0 auto;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
 }
 
 .user-add .add-button:hover {
     color: #666;
+    background-color: #f9f9f9;
 }
 
 /* YAML表示オーバーレイ */
@@ -147,4 +151,189 @@ body {
     font-family: 'Courier New', Courier, monospace;
     font-size: 14px;
     color: #333;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 12px;
+    right: 48px;
+    /* 閉じるボタンの横に配置 */
+    background-color: #e0e0e0;
+    color: #555;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.copy-btn:hover {
+    background-color: #ccc;
+}
+
+/* 投稿フォーム用オーバーレイ */
+.post-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    z-index: 1000;
+}
+
+.post-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 投稿フォーム */
+.post-form {
+    width: 90%;
+    max-width: 500px;
+    max-height: 90%;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow-y: auto;
+}
+
+.post-form h2 {
+    margin: 0 0 24px 0;
+    color: #333;
+    font-size: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: #555;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* ファイル選択のスタイル */
+.form-group input[type="file"] {
+    padding: 8px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+.form-group input[type="file"]:hover {
+    background-color: #f0f0f0;
+}
+
+.file-info {
+    margin-top: 4px;
+}
+
+.file-info small {
+    color: #777;
+    font-size: 12px;
+}
+
+/* 画像プレビュー */
+.image-preview {
+    margin-top: 12px;
+    padding: 12px;
+    border: 2px dashed #e0e0e0;
+    border-radius: 8px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.image-preview img {
+    max-width: 100%;
+    max-height: 150px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 24px;
+}
+
+.form-buttons button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#cancelPost {
+    background-color: #f5f5f5;
+    color: #666;
+}
+
+#cancelPost:hover {
+    background-color: #e9e9e9;
+}
+
+#submitPost {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#submitPost:hover {
+    background-color: #45a049;
+}
+
+#submitPost:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* ユーザー投稿アイテムのスタイル */
+.user-item {
+    border: 2px dashed rgba(76, 175, 80, 0.3);
+    background: rgba(76, 175, 80, 0.05);
+}
+
+.user-item:hover {
+    border-color: rgba(76, 175, 80, 0.5);
+    background: rgba(76, 175, 80, 0.1);
 }

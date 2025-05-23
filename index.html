@@ -10,27 +10,11 @@
 
   <div class="desk-container">
     <!-- 机 -->
-    <div class="desk">
-      <!-- アイテム群 -->
-      <div class="item" id="item-character">
-        <img src="assets/images/character.jpg" alt="小さなキャラクター">
-        <p class="item-label">小さなキャラクター</p>
-      </div>
-      <div class="item" id="item-diorama">
-        <img src="assets/images/diorama.jpg" alt="横浜ジオラマの洋書">
-        <p class="item-label">横浜ジオラマの洋書</p>
-      </div>
-      <div class="item" id="item-crystal">
-        <img src="assets/images/crystal.jpg" alt="クリスタルアップルの文明">
-        <p class="item-label">クリスタルアップルの文明</p>
-      </div>
-      <div class="item" id="item-soba">
-        <img src="assets/images/soba.jpg" alt="天ぷらそばレシピ">
-        <p class="item-label">天ぷらそばレシピ</p>
-      </div>
-
+    <div class="desk" id="desk">
+      <!-- アイテム群はJavaScriptで動的生成 -->
+      
       <!-- ユーザー追加エリア -->
-      <div class="item user-add">
+      <div class="item user-add" id="addNewItem">
         <div class="add-button">＋</div>
         <p class="item-label">新しいアイテムを追加</p>
       </div>
@@ -42,7 +26,44 @@
 <div class="yaml-overlay" id="yamlOverlay">
     <div class="yaml-card">
         <button class="close-btn" id="closeYaml">✕</button>
+        <button class="copy-btn" id="copyYaml">📋 コピー</button>
         <pre id="yamlContent"></pre>
+    </div>
+</div>
+
+<!-- 投稿フォーム用のモーダル -->
+<div class="post-overlay" id="postOverlay">
+    <div class="post-form">
+        <button class="close-btn" id="closePost">✕</button>
+        <h2>新しいYAMLアイテムを追加</h2>
+        
+        <form id="yamlForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="itemTitle">作品タイトル</label>
+                <input type="text" id="itemTitle" name="itemTitle" required placeholder="例：魔法の森のクリスタル">
+            </div>
+            
+            <div class="form-group">
+                <label for="itemImage">画像ファイル</label>
+                <input type="file" id="itemImage" name="image" accept="image/*" required>
+                <div class="file-info">
+                    <small>対応形式: JPEG, PNG, GIF, WebP（最大5MB）</small>
+                </div>
+                <div class="image-preview" id="imagePreview" style="display: none;">
+                    <img id="previewImg" src="" alt="プレビュー">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="yamlContent">YAML内容</label>
+                <textarea id="yamlContentInput" name="yamlContent" required placeholder="YAML形式で作品の設定を記述してください..."></textarea>
+            </div>
+            
+            <div class="form-buttons">
+                <button type="button" id="cancelPost">キャンセル</button>
+                <button type="submit" id="submitPost">投稿する</button>
+            </div>
+        </form>
     </div>
 </div>
 
