@@ -55,6 +55,14 @@ def main():
         if not file_item.filename:
             raise Exception('No file selected')
         
+        # YAMLコンテンツを取得
+        if 'yamlContent' not in form:
+            raise Exception('No YAML content provided')
+        
+        yaml_content = form['yamlContent'].value
+        if not yaml_content.strip():
+            raise Exception('YAML content is empty')
+        
         # ファイル名を安全に処理
         original_filename = safe_filename(file_item.filename)
         
@@ -66,18 +74,24 @@ def main():
         
         # アップロードディレクトリのパス（ディレクトリ作成は行わない）
         upload_dir = Path('../assets/images/uploads')
+        yaml_dir = Path('../yaml/user')
         
         # ディレクトリが存在するかチェック
         if not upload_dir.exists():
             raise Exception('Upload directory does not exist')
         
+        # YAMLディレクトリが存在しない場合は作成
+        yaml_dir.mkdir(parents=True, exist_ok=True)
+        
         # ユニークなファイル名を生成（完全にASCII安全）
         timestamp = str(int(time.time()))
         hash_suffix = hashlib.md5(timestamp.encode('ascii')).hexdigest()[:8]
         new_filename = f"upload-{timestamp}-{hash_suffix}{file_ext}"
+        yaml_filename = f"user-{timestamp}-{hash_suffix}.yaml"
         
         # ファイルパス
         file_path = upload_dir / new_filename
+        yaml_path = yaml_dir / yaml_filename
         
         # ファイルサイズチェック（5MB制限）
         max_size = 5 * 1024 * 1024  # 5MB
@@ -85,18 +99,24 @@ def main():
         if len(file_data) > max_size:
             raise Exception('File size too large (max 5MB)')
         
-        # ファイルを保存
+        # 画像ファイルを保存
         with open(file_path, 'wb') as f:
             f.write(file_data)
         
+        # YAMLファイルを保存
+        with open(yaml_path, 'w', encoding='utf-8') as f:
+            f.write(yaml_content)
+        
         # ファイル権限を設定（必要に応じて）
         os.chmod(file_path, 0o644)
+        os.chmod(yaml_path, 0o644)
         
         # 成功レスポンス（ASCII安全）
         response = {
             'success': True,
             'message': 'Upload completed successfully',
             'imageUrl': f'./assets/images/uploads/{new_filename}',
+            'yamlFile': f'./yaml/user/{yaml_filename}',
             'originalName': original_filename,
             'size': len(file_data)
         }

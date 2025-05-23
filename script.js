@@ -112,7 +112,7 @@ async function uploadImage(file) {
         const result = JSON.parse(responseText);
         
         if (result.success) {
-            return result.imageUrl;
+            return result;  // 結果オブジェクト全体を返す
         } else {
             throw new Error(result.message);
         }
@@ -184,16 +184,16 @@ function createUserItemElement(item) {
         <p class="item-label">${item.title}</p>
     `;
     
-    // クリックイベントを追加
+    // クリックイベントを追加（既存アイテムと同じようにファイルから読み込み）
     element.addEventListener('click', () => {
-        showYAML(null, true, item.yamlContent);
+        showYAML(item.yamlFile);
     });
     
     return element;
 }
 
 // 新しいアイテムを机に追加（localStorage保存あり）
-async function addItemToDesk(title, imageUrl, yamlContent) {
+async function addItemToDesk(title, imageUrl, yamlFile) {
     // ユニークIDを生成
     const itemId = 'user-item-' + Date.now();
     
@@ -203,7 +203,7 @@ async function addItemToDesk(title, imageUrl, yamlContent) {
         id: itemId,
         title: title,
         imageUrl: imageUrl,
-        yamlContent: yamlContent,
+        yamlFile: yamlFile,  // YAMLファイルパスを保存
         timestamp: Date.now()
     });
     localStorage.setItem('userYamlItems', JSON.stringify(userItems));
@@ -242,10 +242,10 @@ async function handleFormSubmit(event) {
         }
         
         // 画像をアップロード
-        const imageUrl = await uploadImage(file);
+        const result = await uploadImage(file);
         
-        // アイテムを追加
-        await addItemToDesk(title, imageUrl, yamlContent);
+        // アイテムを追加（YAMLファイルパスを使用）
+        await addItemToDesk(title, result.imageUrl, result.yamlFile);
         
         // フォームを閉じる
         closePostForm();
