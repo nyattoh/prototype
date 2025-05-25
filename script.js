@@ -144,30 +144,46 @@ async function loadAllItems() {
     }
     
     // 既存アイテムを表示
-    defaultItems.forEach(item => {
-        const element = createDefaultItemElement(item);
-        desk.insertBefore(element, addButton);
+    defaultItems.forEach((item, idx) => {
+        const element = createDefaultItemElement(item, idx);
+        desk.appendChild(element);
     });
     
     // ユーザー投稿アイテムを表示
     const userItems = getUserItems();
-    userItems.forEach(item => {
-        const element = createUserItemElement(item);
-        desk.insertBefore(element, addButton);
+    userItems.forEach((item, idx) => {
+        const element = createUserItemElement(item, idx);
+        desk.appendChild(element);
     });
+    
+    // 新しいアイテム追加ボタンも絶対配置
+    ContentAnalyzer.applyPlacementStyle(addButton, 'misc', 0);
+    addButton.style.position = 'absolute';
 }
 
 // 既存アイテム要素を作成
-function createDefaultItemElement(item) {
+function createDefaultItemElement(item, idx) {
     const element = document.createElement('div');
     element.className = 'item';
     element.id = item.id;
+    element.style.position = 'absolute';
+    
+    fetch(item.yamlFile)
+        .then(response => response.text())
+        .then(yamlContent => {
+            const contentType = ContentAnalyzer.analyzeContent(yamlContent, item.title);
+            ContentAnalyzer.applyPlacementStyle(element, contentType, idx);
+        })
+        .catch(error => {
+            console.error('YAML読み込みエラー:', error);
+            ContentAnalyzer.applyPlacementStyle(element, ContentAnalyzer.CONTENT_TYPES.MISC, idx);
+        });
+    
     element.innerHTML = `
         <img src="${item.imageUrl}" alt="${item.title}">
         <p class="item-label">${item.title}</p>
     `;
     
-    // クリックイベントを追加
     element.addEventListener('click', () => {
         showYAML(item.yamlFile);
     });
@@ -176,16 +192,28 @@ function createDefaultItemElement(item) {
 }
 
 // ユーザーアイテム要素を作成
-function createUserItemElement(item) {
+function createUserItemElement(item, idx) {
     const element = document.createElement('div');
     element.className = 'item user-item';
     element.id = item.id;
+    element.style.position = 'absolute';
+    
+    fetch(item.yamlFile)
+        .then(response => response.text())
+        .then(yamlContent => {
+            const contentType = ContentAnalyzer.analyzeContent(yamlContent, item.title);
+            ContentAnalyzer.applyPlacementStyle(element, contentType, idx);
+        })
+        .catch(error => {
+            console.error('YAML読み込みエラー:', error);
+            ContentAnalyzer.applyPlacementStyle(element, ContentAnalyzer.CONTENT_TYPES.MISC, idx);
+        });
+    
     element.innerHTML = `
         <img src="${item.imageUrl}" alt="${item.title}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMTIwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjZjVmNWY1Ii8+Cjx0ZXh0IHg9IjYwIiB5PSI0NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjOTk5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj7nlLvlg4E8L3RleHQ+Cjwvc3ZnPgo='">
         <p class="item-label">${item.title}</p>
     `;
     
-    // クリックイベントを追加（既存アイテムと同じようにファイルから読み込み）
     element.addEventListener('click', () => {
         showYAML(item.yamlFile);
     });
@@ -304,5 +332,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     const yamlForm = document.getElementById('yamlForm');
     if (yamlForm) {
         yamlForm.onsubmit = handleFormSubmit;
+    }
+    
+    // オーバーレイの外側クリックでモーダルを閉じる
+    const yamlOverlay = document.getElementById('yamlOverlay');
+    if (yamlOverlay) {
+        yamlOverlay.addEventListener('click', (e) => {
+            // オーバーレイ自体がクリックされた場合のみ閉じる（子要素のクリックは無視）
+            if (e.target === yamlOverlay) {
+                closeYAML();
+            }
+        });
+    }
+    
+    const postOverlay = document.getElementById('postOverlay');
+    if (postOverlay) {
+        postOverlay.addEventListener('click', (e) => {
+            // オーバーレイ自体がクリックされた場合のみ閉じる（子要素のクリックは無視）
+            if (e.target === postOverlay) {
+                closePostForm();
+            }
+        });
     }
 });
