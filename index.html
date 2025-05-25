@@ -3,22 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YAML Creative Remix Desk</title>
+  <title>コタのワクワクYAMLルーム</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="desk-container">
-    <!-- 机 -->
-    <div class="desk" id="desk">
-      <!-- アイテム群はJavaScriptで動的生成 -->
-      
-      <!-- ユーザー追加エリア -->
-      <div class="item user-add" id="addNewItem">
-        <div class="add-button">＋</div>
-        <p class="item-label">新しいアイテムを追加</p>
-      </div>
-
+  <div class="desk-container" id="desk">
+    <!-- アイテム群はJavaScriptで動的生成 -->
+    <!-- ユーザー追加エリア -->
+    <div class="item user-add" id="addNewItem">
+      <div class="add-button">＋</div>
+      <p class="item-label">新しいアイテムを追加</p>
     </div>
   </div>
 
@@ -68,6 +63,8 @@
 </div>
 
 <script src="script.js"></script>
+<!-- コンテンツ分析スクリプト -->
+<script src="content-analyzer.js"></script>
 
 </body>
 </html>
