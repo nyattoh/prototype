@@ -6,13 +6,23 @@ on:
 jobs:
   claude-response:
     runs-on: ubuntu-latest
-    if: contains(github.event.comment.body, '@claude')
+    # Only run for @claude comments from the repo owner, org members, or collaborators.
+    if: >-
+      contains(github.event.comment.body, '@claude') &&
+      contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association)
+    # Minimum permissions documented in anthropics/claude-code-action (beta) examples/claude.yml
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+      actions: read
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4 as of 2026-10-24
         
       - name: Claude Code Action
-        uses: anthropics/claude-code-action@beta
+        uses: anthropics/claude-code-action@28f83620103c48a57093dcc2837eec89e036bb9f # beta as of 2026-10-24
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
